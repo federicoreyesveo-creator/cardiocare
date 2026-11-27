@@ -92,9 +92,9 @@ const footer=()=>`
 <footer class="foot">
   <div class="ftop">
     <div class="fbrand"><a class="logo" href="#inicio">${LOGO}<span>Cardio Care</span></a><p>Dr. Josué Cauich Segovia<br>Cardiólogo Pediatra Intervencionista<br>Mérida, Yucatán</p></div>
-    <nav aria-label="Pie de página"><h4>Sitio</h4><a href="#inicio">Inicio</a><a href="#acerca-de">Acerca de</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></nav>
-    <div><h4>Contacto</h4>${PHONES.map(([t,n])=>`<a class="mono" href="tel:${n}">${t}</a>`).join("")}<a href="${MAPS}" target="_blank" rel="noopener">Hospital Star Médica, Altabrisa</a></div>
-    <div><h4>Horario</h4>${HOURS.map(x=>`<span class="hr"><span>${x[0]}</span><span class="mono">${x[1]}</span></span>`).join("")}</div>
+    <nav aria-label="Pie de página"><h2 class="fh">Sitio</h2><a href="#inicio">Inicio</a><a href="#acerca-de">Acerca de</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></nav>
+    <div><h2 class="fh">Contacto</h2>${PHONES.map(([t,n])=>`<a class="mono" href="tel:${n}">${t}</a>`).join("")}<a href="${MAPS}" target="_blank" rel="noopener">Hospital Star Médica, Altabrisa</a></div>
+    <div><h2 class="fh">Horario</h2>${HOURS.map(x=>`<span class="hr"><span>${x[0]}</span><span class="mono">${x[1]}</span></span>`).join("")}</div>
   </div>
   <div class="fwm" aria-hidden="true">${ecgWide([.2,.64]).replace('class="ecg draw"','class="ecg"')}<span class="wm">Cardio Care</span></div>
   <div class="fbot"><span>© 2026 Cardio Care · Dr. Josué Cauich Segovia</span><span class="r"><a class="ab" href="${ALMA}" target="_blank" rel="noopener">Diseñado por <b>Alma Bruta</b></a><a href="#inicio" onclick="scrollTo({top:0,behavior:'smooth'});return false">Volver arriba ↑</a></span></div>
@@ -127,7 +127,7 @@ function home(){
     <div class="nums rise d4">
       <div><b>250<sup>+</sup></b><span>Pacientes atendidos</span></div>
       <div><b>315<sup>+</sup></b><span>Sesiones médicas</span></div>
-      <a href="${RATING.url}" target="_blank" rel="noopener" style="text-decoration:none" aria-label="Calificación ${RATING.score} de 5 en Google, ${RATING.count} reseñas"><b>${RATING.score}<sup>★</sup></b><span>${RATING.count} reseñas en Google</span></a>
+      <a href="${RATING.url}" target="_blank" rel="noopener" style="text-decoration:none"><b>${RATING.score}<sup>★</sup></b><span>${RATING.count} reseñas en Google</span></a>
     </div>
   </div>
   <div class="v">
@@ -243,8 +243,8 @@ function contact(){
     <div class="rise d2" style="margin-top:22px">${liveHTML()}</div>
     <div class="calls rise d3">${PHONES.map(([t,n],i)=>`<a class="call" href="tel:${n}"><span><small>${i?"Teléfono alterno":"Teléfono principal"}</small><b>${t}</b></span><span class="ar">${I.phone}</span></a>`).join("")}</div>
     <div class="cinfo rise d4">
-      <div><h4>Dirección</h4><p>${ADDRESS}</p><a class="link" href="${MAPS}" target="_blank" rel="noopener">Cómo llegar ${I.arrow.replace('<svg','<svg width="15" height="15"')}</a></div>
-      <div><h4>Horario</h4>${hoursHTML()}</div>
+      <div><h2 class="fh">Dirección</h2><p>${ADDRESS}</p><a class="link" href="${MAPS}" target="_blank" rel="noopener">Cómo llegar ${I.arrow.replace('<svg','<svg width="15" height="15"')}</a></div>
+      <div><h2 class="fh">Horario</h2>${hoursHTML()}</div>
     </div>
   </div>
   <div class="map cmap rise d2"><iframe src="${MAP_EMBED}" title="Mapa: Hospital Star Médica Mérida" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div class="card"><div><b>Hospital Star Médica Mérida</b>Consultorio 916, Col. Altabrisa</div><div><a class="btn" href="${MAPS}" target="_blank" rel="noopener" style="padding:5px 5px 5px 18px;font-size:14px">Abrir en Maps <span class="bi" style="width:34px;height:34px">${I.arrow}</span></a></div></div></div>
@@ -290,7 +290,8 @@ function route(){
   else if(h==="contacto"){view="contacto";html=contact()}
   else {view=SCROLL[h]==="servicios"?"servicios":"inicio";html=home();target=SCROLL[h]||null}
   const key=h.startsWith("servicio-")||h==="acerca-de"||h==="contacto"?h:"inicio";
-  if(key!==last){main.innerHTML=html;last=key;bindPage()}
+  // La portada ya viene escrita en el HTML (prerender): la primera vez no se vuelve a pintar, solo se activa.
+  if(key!==last){if(main.dataset.pre===key)main.removeAttribute("data-pre");else main.innerHTML=html;last=key;bindPage()}
   document.querySelectorAll("[data-nav]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.nav===view)||a.removeAttribute("aria-current"));
   document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===view)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   closeMega();closeDrawer();
@@ -369,7 +370,7 @@ const megaWrap=document.getElementById("mega"), megabtn=document.getElementById(
   mp.innerHTML=`<div class="mg-l"><div class="mg-h"><span class="lbl">Nuestros servicios</span><a class="link" href="#servicios">Ver todos ${I.arrow.replace('<svg','<svg width="15" height="15"')}</a></div>
   <div class="mg-list">${SVC.map((s,i)=>`<a class="mg-i" href="#servicio-${s.slug}" data-k="${s.slug}"><span class="n">${nn(S.indexOf(s))}</span><span class="t"><b>${s.name}</b><small>${s.short}</small></span><span class="go">${I.arrow}</span></a>`).join("")}</div>
   <div class="mg-f"><span>¿Tienes alguna pregunta? Llámanos y te orientamos.</span><a class="mono" href="tel:${PHONES[0][1]}">${PHONES[0][0]}</a></div></div>
-  <a class="mg-feat" id="mgfeat" href="#servicio-${SVC[0].slug}"><img id="mgimg" src="${IMG[SVC[0].img[2]]}" alt=""><span class="tx"><small id="mgn">Servicio ${nn(S.indexOf(SVC[0]))} / ${N}</small><b id="mgt">${SVC[0].name}</b><span id="mgs">${SVC[0].short}</span></span><span class="ar">${I.arrow}</span></a>`;
+  <a class="mg-feat" id="mgfeat" href="#servicio-${SVC[0].slug}"><img id="mgimg" src="${IMG[SVC[0].img[2]]}" alt="" loading="lazy" decoding="async"><span class="tx"><small id="mgn">Servicio ${nn(S.indexOf(SVC[0]))} / ${N}</small><b id="mgt">${SVC[0].name}</b><span id="mgs">${SVC[0].short}</span></span><span class="ar">${I.arrow}</span></a>`;
   const show=s=>{document.getElementById("mgfeat").href="#servicio-"+s.slug;document.getElementById("mgimg").src=IMG[s.img[2]];document.getElementById("mgn").textContent=`Servicio ${nn(S.indexOf(s))} / ${N}`;document.getElementById("mgt").textContent=s.name;document.getElementById("mgs").textContent=s.short;mp.querySelectorAll(".mg-i").forEach(x=>x.classList.toggle("on",x.dataset.k===s.slug))};
   mp.querySelectorAll(".mg-i").forEach(a=>{a.addEventListener("mouseenter",()=>show(bySlug[a.dataset.k]));a.addEventListener("focus",()=>show(bySlug[a.dataset.k]))});
   show(SVC[0]);
@@ -383,6 +384,9 @@ const drawer=document.getElementById("drawer"), menubtn=document.getElementById(
 function closeDrawer(){drawer.hidden=true;menubtn.setAttribute("aria-expanded","false");document.body.style.overflow=""}
 menubtn.addEventListener("click",()=>{drawer.hidden=false;menubtn.setAttribute("aria-expanded","true");document.body.style.overflow="hidden";document.getElementById("closebtn").focus()});
 document.getElementById("closebtn").addEventListener("click",closeDrawer);
+drawer.addEventListener("click",e=>{if(e.target.closest("a"))closeDrawer()});
+/* el logo es el inicio: si ya estás en la portada, sube arriba */
+document.querySelectorAll("a.logo").forEach(a=>a.addEventListener("click",()=>{if((location.hash||"#inicio")==="#inicio")window.scrollTo({top:0,behavior:"smooth"})}));
 
 /* barra flotante y navegación al hacer scroll */
 const top_=document.getElementById("top");
