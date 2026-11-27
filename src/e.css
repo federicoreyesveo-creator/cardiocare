@@ -526,4 +526,16 @@ html,body{overflow-x:clip}
 .rv.on{scale:1;opacity:1}
 .cmap .card{grid-template-columns:1fr auto;align-items:center}
 @media (max-width:560px){.cmap .card{grid-template-columns:1fr}}
+/* carrusel pegado al borde de las cajas */
+.car{padding:0 0 8px;scroll-padding-inline:0}
+/* aparición y parallax al hacer scroll */
+.help .im{overflow:hidden}
+@media (prefers-reduced-motion:no-preference){
+  .js-rv [data-r]{opacity:0;translate:0 42px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--rd,0) * 90ms)}
+  .js-rv [data-r].in-v{opacity:1;translate:0 0}
+  .js-rv .stage > img[data-r]{translate:-50% -50%}
+  .js-rv .rv[data-r]{transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1),scale .7s var(--ease),background-color .6s var(--ease),color .6s var(--ease),box-shadow .6s var(--ease)}
+  .js-rv .rv[data-r]:not(.on).in-v{opacity:.55}
+  [data-px]{scale:1.14;translate:0 var(--py,0px);will-change:translate}
+}
 </style>

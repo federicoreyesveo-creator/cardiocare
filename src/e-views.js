@@ -339,7 +339,21 @@ function slider(el){
   let st;el.addEventListener("scroll",()=>{if(down||!center)return;clearTimeout(st);st=setTimeout(()=>{const c=nearest(el.scrollLeft);if(c!==cur)mark(c)},120)},{passive:true});
   mark(center?el.querySelector(".on"):items()[0]);
 }
-function bindPage(){fitWM();
+function reveal(){
+  if(RM.matches||!("IntersectionObserver" in window))return;
+  document.documentElement.classList.add("js-rv");
+  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car > *, .rv, .stage > img, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
+  const els=[...main.querySelectorAll(SEL)].filter(e=>!e.closest(".hero,.phead,.rise")&&!e.classList.contains("rise"));
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-v");io.unobserve(en.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  els.forEach(e=>{const sib=[...e.parentElement.children].filter(x=>els.includes(x));e.style.setProperty("--rd",Math.min(sib.indexOf(e),6));e.setAttribute("data-r","");io.observe(e)});
+  main.querySelectorAll(".about .ph > img, .help .im img, .phead .media img, .sc img").forEach(i=>i.setAttribute("data-px",""));
+  parallax();
+}
+let pxq=0;
+function parallax(){if(RM.matches)return;cancelAnimationFrame(pxq);pxq=requestAnimationFrame(()=>{const H=innerHeight;
+  main.querySelectorAll("[data-px]").forEach(i=>{const b=i.parentElement.getBoundingClientRect();if(b.bottom<-50||b.top>H+50)return;
+    const p=((b.top+b.height/2)-H/2)/(H/2+b.height/2);i.style.setProperty("--py",(p*-b.height*.06).toFixed(1)+"px")})})}
+function bindPage(){fitWM();reveal();
   main.querySelectorAll(".car,.rc").forEach(slider);
   main.querySelectorAll("[data-car]").forEach(b=>b.addEventListener("click",()=>{const el=document.getElementById(b.dataset.car);el._step&&el._step(+b.dataset.dir)}));
   main.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Copiado"}catch(e){b.textContent=b.dataset.copy}setTimeout(()=>b.textContent="Copiar",1800)}));
@@ -372,7 +386,7 @@ document.getElementById("closebtn").addEventListener("click",closeDrawer);
 
 /* barra flotante y navegación al hacer scroll */
 const top_=document.getElementById("top");
-function onScroll(){top_.classList.toggle("scrolled",scrollY>40)}
+function onScroll(){top_.classList.toggle("scrolled",scrollY>40);parallax()}
 addEventListener("scroll",onScroll,{passive:true});
 addEventListener("hashchange",route);
 route();

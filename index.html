@@ -535,6 +535,18 @@ html,body{overflow-x:clip}
 .rv.on{scale:1;opacity:1}
 .cmap .card{grid-template-columns:1fr auto;align-items:center}
 @media (max-width:560px){.cmap .card{grid-template-columns:1fr}}
+/* carrusel pegado al borde de las cajas */
+.car{padding:0 0 8px;scroll-padding-inline:0}
+/* aparición y parallax al hacer scroll */
+.help .im{overflow:hidden}
+@media (prefers-reduced-motion:no-preference){
+  .js-rv [data-r]{opacity:0;translate:0 42px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--rd,0) * 90ms)}
+  .js-rv [data-r].in-v{opacity:1;translate:0 0}
+  .js-rv .stage > img[data-r]{translate:-50% -50%}
+  .js-rv .rv[data-r]{transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1),scale .7s var(--ease),background-color .6s var(--ease),color .6s var(--ease),box-shadow .6s var(--ease)}
+  .js-rv .rv[data-r]:not(.on).in-v{opacity:.55}
+  [data-px]{scale:1.14;translate:0 var(--py,0px);will-change:translate}
+}
 </style>
 </head>
 <body>
@@ -1072,7 +1084,21 @@ function slider(el){
   let st;el.addEventListener("scroll",()=>{if(down||!center)return;clearTimeout(st);st=setTimeout(()=>{const c=nearest(el.scrollLeft);if(c!==cur)mark(c)},120)},{passive:true});
   mark(center?el.querySelector(".on"):items()[0]);
 }
-function bindPage(){fitWM();
+function reveal(){
+  if(RM.matches||!("IntersectionObserver" in window))return;
+  document.documentElement.classList.add("js-rv");
+  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car > *, .rv, .stage > img, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
+  const els=[...main.querySelectorAll(SEL)].filter(e=>!e.closest(".hero,.phead,.rise")&&!e.classList.contains("rise"));
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-v");io.unobserve(en.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  els.forEach(e=>{const sib=[...e.parentElement.children].filter(x=>els.includes(x));e.style.setProperty("--rd",Math.min(sib.indexOf(e),6));e.setAttribute("data-r","");io.observe(e)});
+  main.querySelectorAll(".about .ph > img, .help .im img, .phead .media img, .sc img").forEach(i=>i.setAttribute("data-px",""));
+  parallax();
+}
+let pxq=0;
+function parallax(){if(RM.matches)return;cancelAnimationFrame(pxq);pxq=requestAnimationFrame(()=>{const H=innerHeight;
+  main.querySelectorAll("[data-px]").forEach(i=>{const b=i.parentElement.getBoundingClientRect();if(b.bottom<-50||b.top>H+50)return;
+    const p=((b.top+b.height/2)-H/2)/(H/2+b.height/2);i.style.setProperty("--py",(p*-b.height*.06).toFixed(1)+"px")})})}
+function bindPage(){fitWM();reveal();
   main.querySelectorAll(".car,.rc").forEach(slider);
   main.querySelectorAll("[data-car]").forEach(b=>b.addEventListener("click",()=>{const el=document.getElementById(b.dataset.car);el._step&&el._step(+b.dataset.dir)}));
   main.querySelectorAll(".copy").forEach(b=>b.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Copiado"}catch(e){b.textContent=b.dataset.copy}setTimeout(()=>b.textContent="Copiar",1800)}));
@@ -1105,7 +1131,7 @@ document.getElementById("closebtn").addEventListener("click",closeDrawer);
 
 /* barra flotante y navegación al hacer scroll */
 const top_=document.getElementById("top");
-function onScroll(){top_.classList.toggle("scrolled",scrollY>40)}
+function onScroll(){top_.classList.toggle("scrolled",scrollY>40);parallax()}
 addEventListener("scroll",onScroll,{passive:true});
 addEventListener("hashchange",route);
 route();
