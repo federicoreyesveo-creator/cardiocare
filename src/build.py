@@ -46,6 +46,8 @@ data = read("e-data.js")
 services = [dict(slug=s, name=n, short=sh.replace("“", "").replace("”", ""), img=im)
             for s, n, sh, im in re.findall(r'\{slug:"([^"]+)",name:"([^"]+)",short:"([^"]+)",img:\[[^\]]*?"([a-z0-9-]+)"\]', data)]
 
+FAQ = json.load(open("faq.json", encoding="utf-8"))
+
 DR = "Dr. Josué Cauich Segovia"
 TAIL = "Cardiólogo Pediatra en Mérida | Cardio Care"
 
@@ -72,13 +74,30 @@ pages = [
 physician = {
     "@type": "Physician",
     "@id": SITE + "/#medico",
-    "name": f"{DR} · Cardio Care",
-    "description": "Cardiólogo pediatra intervencionista en Mérida, Yucatán.",
+    "name": DR,
+    "alternateName": "Cardio Care",
+    "description": "Cardiólogo pediatra intervencionista en Mérida, Yucatán. Atiende a bebés, niños y adolescentes: soplos, arritmias, dolor de pecho, disautonomía, cardiopatías congénitas y cateterismo.",
     "url": SITE + "/",
     "image": SITE + "/img/dr2.webp",
     "logo": SITE + "/favicon.svg",
     "medicalSpecialty": ["Pediatric", "Cardiovascular"],
     "telephone": "+529994092633",
+    "priceRange": "$$",
+    "isAcceptingNewPatients": True,
+    "knowsLanguage": "es",
+    "worksFor": {"@id": SITE + "/#consultorio"},
+    "hospitalAffiliation": {"@type": "Hospital", "name": "Hospital Star Médica Mérida"},
+    "alumniOf": [
+        {"@type": "CollegeOrUniversity", "name": "Instituto Nacional de Pediatría (UNAM)"},
+        {"@type": "CollegeOrUniversity", "name": "Instituto Nacional de Cardiología Ignacio Chávez"},
+    ],
+    "memberOf": {"@type": "MedicalOrganization", "name": "Asociación Mexicana de Especialistas en Cardiopatías Congénitas (AMECC)"},
+    "hasCredential": [
+        {"@type": "EducationalOccupationalCredential", "credentialCategory": "Certificación", "name": "Cardiología Pediátrica", "recognizedBy": {"@type": "Organization", "name": "Consejo Mexicano de Cardiología"}},
+        {"@type": "EducationalOccupationalCredential", "credentialCategory": "Certificación", "name": "Cardiología Intervencionista", "recognizedBy": {"@type": "Organization", "name": "Consejo Mexicano de Cardiología"}},
+        {"@type": "EducationalOccupationalCredential", "credentialCategory": "Certificación", "name": "Pediatría", "recognizedBy": {"@type": "Organization", "name": "Consejo Mexicano de Pediatría"}},
+    ],
+    "knowsAbout": ["Cardiología pediátrica", "Cardiología intervencionista", "Cardiopatías congénitas", "Soplos cardiacos", "Arritmias", "Disautonomía", "Cateterismo cardiaco", "Valvuloplastia", "Stents"],
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "Calle 26 #199 por 15 y 7, Consultorio 916, Hospital Star Médica",
@@ -94,11 +113,40 @@ physician = {
         {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "20:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"},
     ],
-    "areaServed": {"@type": "State", "name": "Yucatán"},
+    "areaServed": [{"@type": "City", "name": "Mérida"}, {"@type": "State", "name": "Yucatán"}],
 }
+physician["availableService"] = [{"@type": "MedicalProcedure" if s["slug"] in ("cateterismo", "colocacion-de-stents", "cierre-de-defectos", "diagnostico-avanzado") else "MedicalTherapy",
+                                  "name": s["name"], "url": f"{SITE}/servicios/{s['slug']}/"} for s in services]
+
+clinic = {
+    "@type": "MedicalClinic",
+    "@id": SITE + "/#consultorio",
+    "name": "Cardio Care · Cardiología Pediátrica",
+    "url": SITE + "/",
+    "image": SITE + "/og.jpg",
+    "telephone": "+529994092633",
+    "medicalSpecialty": ["Pediatric", "Cardiovascular"],
+    "address": physician["address"],
+    "geo": physician["geo"],
+    "hasMap": physician["hasMap"],
+    "openingHoursSpecification": physician["openingHoursSpecification"],
+    "containedInPlace": physician["hospitalAffiliation"],
+    "employee": {"@id": SITE + "/#medico"},
+    "contactPoint": [{"@type": "ContactPoint", "telephone": t, "contactType": "reservations", "areaServed": "MX", "availableLanguage": "es"} for t in ("+529994092633", "+529991961958")],
+}
+website = {"@type": "WebSite", "@id": SITE + "/#web", "url": SITE + "/", "name": "Cardio Care", "inLanguage": "es-MX", "publisher": {"@id": SITE + "/#consultorio"}}
+
+def faq_ld(items, url):
+    return {"@type": "FAQPage", "@id": SITE + url + "#preguntas", "url": SITE + url, "inLanguage": "es-MX",
+            "mainEntity": [{"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}} for f in items]}
 
 def jsonld(pg):
-    graph = [physician]
+    graph = [physician, clinic, website]
+    slug = pg["url"].split("/")[2] if pg["url"].startswith("/servicios/") else None
+    if pg["url"] == "/":
+        graph.append(faq_ld(FAQ["home"], "/"))
+    elif slug and FAQ["servicios"].get(slug):
+        graph.append(faq_ld(FAQ["servicios"][slug], pg["url"]))
     if pg["url"] != "/":
         items = [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": SITE + "/"}]
         if pg["url"].startswith("/servicios/"):
@@ -106,17 +154,23 @@ def jsonld(pg):
         items.append({"@type": "ListItem", "position": len(items) + 1, "name": pg["crumb"], "item": SITE + pg["url"]})
         graph.append({"@type": "BreadcrumbList", "itemListElement": items})
         graph.append({"@type": "MedicalWebPage", "url": SITE + pg["url"], "name": pg["title"], "description": pg["desc"],
-                      "about": {"@id": SITE + "/#medico"}, "inLanguage": "es-MX"})
+                      "about": {"@id": SITE + "/#medico"}, "inLanguage": "es-MX",
+                      "isPartOf": {"@id": SITE + "/#web"}, "reviewedBy": {"@id": SITE + "/#medico"}, "lastReviewed": TODAY,
+                      "audience": {"@type": "PeopleAudience", "audienceType": "Padres y madres de pacientes pediátricos"},
+                      **({"specialty": "Pediatric"} if slug else {})})
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
-FONTS = "https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&family=Geist+Mono:wght@500&display=swap"
 
 def head(pg):
     e = lambda s: H.escape(s, quote=True)
     lcp = '<link rel="preload" as="image" href="/img/dr-cut.webp" fetchpriority="high">\n' if pg["url"] == "/" else ""
     return f'''<title>{e(pg["title"])}</title>
 <meta name="description" content="{e(pg["desc"])}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="{SITE}{pg["url"]}">
+<link rel="alternate" hreflang="es-MX" href="{SITE}{pg["url"]}">
+<meta name="author" content="{DR}">
+<meta name="geo.region" content="MX-YUC"><meta name="geo.placename" content="Mérida"><meta name="geo.position" content="21.0160689;-89.5849652"><meta name="ICBM" content="21.0160689, -89.5849652">
 <meta name="theme-color" content="#2347D1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -127,16 +181,18 @@ def head(pg):
 <meta property="og:description" content="{e(pg["desc"])}">
 <meta property="og:url" content="{SITE}{pg["url"]}">
 <meta property="og:image" content="{SITE}{pg["image"]}">
+<meta property="og:image:alt" content="{e(pg["title"])}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="{FONTS}">
-<link href="{FONTS}" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="{FONTS}" rel="stylesheet"></noscript>
+<meta name="twitter:title" content="{e(pg["title"])}">
+<meta name="twitter:description" content="{e(pg["desc"])}">
+<meta name="twitter:image" content="{SITE}{pg["image"]}">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/onest-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/geist-mono-500-latin.woff2" crossorigin>
 {lcp}<script type="application/ld+json">{jsonld(pg)}</script>
 '''
 
 hdr = read("e-header.html").replace("__LOGO__", LOGO).replace("__PHONE__", PHONE).replace("__HEART__", HEART)
-body = (read("e.css") + "\n" + hdr + "\n" + img_js + data
+body = (read("e.css") + "\n" + hdr + "\n" + img_js + data + "\nconst FAQ=" + json.dumps(FAQ, ensure_ascii=False) + ";\n"
         + "\nconst LOGO=`" + LOGO + "`;\n" + read("e-views.js") + "\n})();\n</script>\n")
 
 def page_html(pg):
@@ -209,6 +265,7 @@ urls = "\n".join(f"  <url><loc>{SITE}{pg['url']}</loc><lastmod>{TODAY}</lastmod>
 write(os.path.join(ROOT, "sitemap.xml"),
       f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
 
+faq_lines = "\n\n".join(f"### {f['q']}\n{f['a']}" for f in FAQ["home"])
 svc_lines = "\n".join(f"- [{s['name']}]({SITE}/servicios/{s['slug']}/): {s['short']}" for s in services)
 write(os.path.join(ROOT, "llms.txt"), f"""# Cardio Care · {DR}
 
@@ -228,6 +285,10 @@ Certificado por el Consejo Mexicano de Cardiología (Cardiología Pediátrica e 
 ## Servicios
 
 {svc_lines}
+
+## Preguntas frecuentes
+
+{faq_lines}
 
 ## Más
 

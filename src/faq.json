@@ -1,0 +1,87 @@
+{
+  "home": [
+    {"q": "¿Qué hace un cardiólogo pediatra?",
+     "a": "Es el médico especialista que diagnostica y trata los problemas del corazón en bebés, niños y adolescentes, desde soplos y arritmias hasta cardiopatías congénitas. El Dr. Josué Cauich Segovia además es cardiólogo intervencionista: puede tratar varias de estas condiciones con cateterismo, sin abrir el pecho."},
+    {"q": "¿Cuándo debo llevar a mi hijo al cardiólogo pediatra?",
+     "a": "Conviene consultar si el pediatra escuchó un soplo, si tu hijo se desmaya, tiene dolor de pecho o palpitaciones al hacer ejercicio, si un bebé se cansa o suda mucho al comer, si sus labios o uñas se ven morados, o si hay enfermedades del corazón en la familia. Una valoración a tiempo confirma o descarta el problema."},
+    {"q": "¿Un soplo en el corazón es grave?",
+     "a": "En la mayoría de los casos, no. Más de la mitad de los niños tiene en algún momento un soplo funcional o inocente, que aparece en un corazón sano y no necesita tratamiento. Como un soplo también puede ser la señal de una cardiopatía congénita, el cardiólogo pediatra lo valora con la exploración y, si hace falta, con un ecocardiograma.",
+     "link": "/servicios/soplos/"},
+    {"q": "¿El dolor de pecho en un niño viene del corazón?",
+     "a": "Casi nunca. Solo entre el 1% y el 4% de los dolores de pecho en niños tiene un origen cardiaco; la mayoría son musculares, respiratorios o sin una causa grave. Vale la pena revisarlo si el dolor aparece con el ejercicio, se acompaña de desmayo o palpitaciones, o si tu hijo tiene una cardiopatía conocida.",
+     "link": "/servicios/dolor-toracico/"},
+    {"q": "¿Es normal que el corazón de mi hijo lata tan rápido?",
+     "a": "Sí. Mientras más pequeño es el niño, más rápido late su corazón: en reposo, un bebé de una semana puede tener entre 90 y 160 latidos por minuto, y un niño de 8 a 11 años entre 60 y 130. Si notas latidos muy rápidos, irregulares o acompañados de mareo, conviene revisarlo.",
+     "link": "/servicios/diagnostico-de-arritmias/"},
+    {"q": "¿Qué es un cateterismo cardiaco y es seguro?",
+     "a": "Es un procedimiento en el que se lleva un tubo muy delgado (catéter) por un vaso sanguíneo hasta el corazón. Sirve para diagnosticar con precisión y para tratar defectos, como cerrar orificios, abrir válvulas o colocar stents, sin cirugía de pecho abierto. Se realiza en el hospital, con el niño bajo una sedación segura.",
+     "link": "/servicios/cateterismo/"},
+    {"q": "¿Qué estudios puede necesitar mi hijo?",
+     "a": "Depende de los síntomas. Los más comunes son el electrocardiograma, la radiografía de tórax y el ecocardiograma, que es la prueba fundamental para ver la estructura del corazón. En casos específicos se indica una prueba de inclinación (Tilt Test) o un cateterismo diagnóstico."},
+    {"q": "¿Qué formación tiene el Dr. Josué Cauich Segovia?",
+     "a": "Se formó en el Instituto Nacional de Pediatría (UNAM) y en el Instituto Nacional de Cardiología “Ignacio Chávez”. Está certificado por el Consejo Mexicano de Cardiología en Cardiología Pediátrica e Intervencionista y por el Consejo Mexicano de Pediatría, y es miembro activo de la AMECC.",
+     "link": "/acerca-de/"},
+    {"q": "¿Dónde está el consultorio y en qué horario atiende?",
+     "a": "En el consultorio 916 del Hospital Star Médica Altabrisa: Calle 26 #199 por 15 y 7, Col. Altabrisa, Mérida, Yucatán. Atiende de lunes a viernes de 9:00 a 20:00 y los sábados de 9:00 a 13:00.",
+     "link": "/contacto/"},
+    {"q": "¿Cómo agendo una cita?",
+     "a": "Llama al (+52) 999 409 2633 o al (+52) 999 196 1958. Te damos el horario disponible más cercano y te decimos qué estudios previos conviene llevar a la consulta.",
+     "link": "/contacto/"}
+  ],
+  "servicios": {
+    "diagnostico-avanzado": [
+      {"q": "¿Para qué sirve un cateterismo diagnóstico?",
+       "a": "Para obtener un mapa exacto del corazón cuando la ecografía o la radiografía no son suficientes. Con un catéter muy fino y un líquido de contraste se ve el corazón en movimiento, se miden las presiones de cada cámara y cuánta sangre llega a los pulmones, y así se decide el mejor tratamiento."},
+      {"q": "¿Todos los niños con una cardiopatía necesitan este estudio?",
+       "a": "No. La mayoría de las cardiopatías congénitas se diagnostican bien con estudios no invasivos, como el ecocardiograma. El cateterismo diagnóstico se indica cuando hace falta información precisa para confirmar si el niño necesita una intervención y planearla."}
+    ],
+    "colocacion-de-stents": [
+      {"q": "¿Qué es un stent y cuándo se usa en niños?",
+       "a": "Es una malla metálica muy fina que se coloca dentro de una arteria demasiado estrecha, como en la coartación de aorta o las estrecheces de las arterias pulmonares. Se lleva plegada con un catéter, se expande en el punto exacto y mantiene la arteria abierta de forma permanente."},
+      {"q": "¿Colocar un stent requiere abrir el pecho?",
+       "a": "No. El stent se coloca por cateterismo, a través de un vaso sanguíneo, sin cirugía de pecho abierto. El flujo de sangre mejora en el momento en que el stent se expande."}
+    ],
+    "disautonomia": [
+      {"q": "¿Qué es la disautonomía en niños?",
+       "a": "Es un grupo de trastornos en los que el sistema nervioso autónomo, que regula sin que lo pensemos la presión, el pulso y otras funciones, pierde el equilibrio. Se estima que la presenta alrededor del 10% de los niños, adolescentes y jóvenes, y puede causar mareos, desmayos, palpitaciones o cansancio."},
+      {"q": "¿Cómo se diagnostica la disautonomía?",
+       "a": "El cardiólogo pediatra evalúa los síntomas y, según el caso, indica un electrocardiograma, una radiografía de tórax y un ecocardiograma. Muchas veces es útil la prueba de inclinación (Tilt Test); si los síntomas son claros, puede no ser necesaria."}
+    ],
+    "cateterismo": [
+      {"q": "¿Qué es el cateterismo cardiaco en niños?",
+       "a": "Es un procedimiento en el que se introduce un catéter por un vaso sanguíneo hasta el corazón. Puede ser diagnóstico, para medir presiones, oxígeno y estructuras, o terapéutico, para tratar defectos sin cirugía de pecho abierto."},
+      {"q": "¿Mi hijo necesita un cateterismo en todos los casos?",
+       "a": "No. La mayoría de las cardiopatías congénitas se diagnostican con métodos no invasivos. El cateterismo se reserva para cuando hace falta definir mejor la cardiopatía o cuando permite tratarla sin una cirugía abierta."}
+    ],
+    "dolor-toracico": [
+      {"q": "¿Todo dolor de pecho en un niño es grave?",
+       "a": "No. Muy pocas veces se debe a una enfermedad grave: la causa más frecuente es desconocida y benigna (35%), seguida del origen muscular o de las costillas (30%). Solo entre el 1% y el 4% de los casos tiene un origen cardiaco."},
+      {"q": "¿Cuándo hay que revisar el dolor de pecho con el cardiólogo?",
+       "a": "Cuando aparece durante el ejercicio, se acompaña de desmayo, palpitaciones o falta de aire, o si el niño tiene una cardiopatía conocida o antecedentes familiares. Una valoración tranquiliza a la familia y descarta una causa cardiaca."}
+    ],
+    "cardiopatias-congenitas": [
+      {"q": "¿Qué tan frecuentes son las cardiopatías congénitas?",
+       "a": "Aparecen en cerca del 1% de los recién nacidos vivos. Son alteraciones en la estructura del corazón que se producen durante su formación, y en la mayoría de los casos su causa es multifactorial."},
+      {"q": "¿Un niño con cardiopatía congénita puede llegar a adulto?",
+       "a": "Sí. Gracias a los avances en el diagnóstico y el tratamiento, hoy más del 90% de los niños con una cardiopatía congénita llega a la edad adulta. Se recomiendan revisiones al menos una vez al año para prevenir y detectar complicaciones."}
+    ],
+    "diagnostico-de-arritmias": [
+      {"q": "¿Una arritmia en mi hijo es peligrosa?",
+       "a": "Casi siempre, no. Los trastornos del ritmo más habituales en la infancia no suelen necesitar tratamiento y permiten llevar una vida normal, incluido el deporte. Algunas arritmias sí requieren atención, por eso es importante el diagnóstico del cardiólogo pediatra."},
+      {"q": "¿Cómo se diagnostica una arritmia?",
+       "a": "La prueba básica es el electrocardiograma (EKG), que registra la actividad eléctrica del corazón. Las arritmias pueden aparecer desde la vida fetal hasta la adolescencia, y el especialista indica estudios adicionales según cada caso."}
+    ],
+    "soplos": [
+      {"q": "¿Qué es un soplo en el corazón?",
+       "a": "Es un sonido que produce la sangre al pasar con turbulencia por el corazón o los grandes vasos, y que el médico escucha con el estetoscopio. Es un hallazgo frecuente en niños y adolescentes."},
+      {"q": "¿Todos los soplos son malos?",
+       "a": "No. La mayoría son funcionales o inocentes: aparecen en corazones sanos y no tienen consecuencias. Más del 50% de los niños los presenta en algún momento. Aun así, un soplo puede ser señal de una cardiopatía congénita, y el cardiólogo pediatra los distingue con la exploración y el ecocardiograma."}
+    ],
+    "cierre-de-defectos": [
+      {"q": "¿Qué es una valvuloplastia con balón?",
+       "a": "Es un procedimiento para abrir una válvula del corazón que nació demasiado estrecha (estenosis). Con un catéter se lleva un pequeño globo hasta el centro de la válvula y se infla unos segundos, lo que separa las fibras pegadas y permite que la válvula se abra."},
+      {"q": "¿La valvuloplastia necesita cirugía abierta?",
+       "a": "No. Se hace por cateterismo, a través de los vasos sanguíneos y sin bisturí en el pecho, de modo que el corazón deja de trabajar el doble para bombear la sangre."}
+    ]
+  }
+}

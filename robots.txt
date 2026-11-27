@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
+# Buscadores con IA: bienvenidos a leer el sitio para citar al doctor en sus respuestas
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://cardiocare-sigma.vercel.app/sitemap.xml

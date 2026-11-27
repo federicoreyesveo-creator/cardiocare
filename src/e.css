@@ -1,6 +1,8 @@
 <style>
 /* Respaldo con las medidas de Onest: mientras carga la fuente, el texto ocupa lo mismo y nada salta. */
-@font-face{font-family:"Onest fb";src:local("Arial");size-adjust:103.3%;ascent-override:93.9%;descent-override:30%;line-gap-override:0%}
+@font-face{font-family:"Onest";font-style:normal;font-weight:300 600;font-display:swap;src:url(/fonts/onest-latin.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/geist-mono-500-latin.woff2) format("woff2")}
+@font-face{font-family:"Onest fb";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("Helvetica");size-adjust:104.5%;ascent-override:93.9%;descent-override:30%;line-gap-override:0%}
 /* Dirección E: paneles redondeados sobre gris hielo, doctor recortado, títulos en dos tonos,
    lecturas tipo monitor en mono y un trazo de ECG como hilo conductor. Serio, cálido y propio de cardiología. */
 :root{
@@ -564,5 +566,39 @@ html,body{overflow-x:clip}
   .rv{width:66vw;scale:.94}
   .rv:not(.on),.js-rv .rv[data-r]:not(.on).in-v{opacity:1;background:var(--ice)}
   .rc{padding-inline:calc(50% - 33vw)}
+}
+
+/* hero: la etiqueta con la especialidad y la ciudad es parte del h1 (palabras clave), sin cambiar cómo se ve */
+.hero h1{margin-top:0;max-width:none}
+.hero h1 .lbl{display:flex;width:fit-content;max-width:100%}
+.hero h1 .hl{display:block;margin-top:22px;max-width:12.5ch}
+
+/* preguntas frecuentes */
+.faq{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,110px);padding:clamp(64px,8vw,110px) clamp(22px,4vw,56px);border-top:1px solid var(--line)}
+.fq-h{position:sticky;top:110px;align-self:start}
+.fq-h .sub{font-size:18px;color:var(--mut);line-height:1.5;margin-top:20px;max-width:40ch}
+.fq-h .btn{margin-top:32px}
+.fq-l{border-bottom:1px solid var(--line)}
+.qa{border-top:1px solid var(--line)}
+.qa summary{list-style:none;display:grid;grid-template-columns:44px minmax(0,1fr) 40px;align-items:center;gap:14px;padding:24px 0;cursor:pointer}
+.qa summary::-webkit-details-marker{display:none}
+.qa .n{font-size:12.5px;letter-spacing:.05em;color:var(--gray)}
+.qa h3{font-size:clamp(19px,1rem + .45vw,23px);letter-spacing:-.02em;line-height:1.25}
+.qa .pm{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--ink);transition:transform .5s var(--ease),background-color .3s,color .3s}
+.qa .pm svg{width:18px;height:18px}
+.qa summary:hover .pm{background:var(--ice)}
+.qa[open] .pm{transform:rotate(45deg);background:var(--c);color:#fff}
+.qa[open] .n{color:var(--r)}
+.qa .ans{padding:0 54px 28px 58px}
+.qa .ans p{color:var(--mut);max-width:62ch;line-height:1.65}
+.qa .ans .link{margin-top:14px;color:var(--primary)}
+@media (prefers-reduced-motion:no-preference){.qa[open] .ans{animation:fqin .6s var(--ease)}}
+@keyframes fqin{from{opacity:0;translate:0 -6px}}
+@media (max-width:860px){
+  .faq{grid-template-columns:1fr}
+  .fq-h{position:static}
+  .qa summary{grid-template-columns:30px minmax(0,1fr) 36px;gap:10px;padding:20px 0}
+  .qa .pm{width:36px;height:36px}
+  .qa .ans{padding:0 0 24px 40px}
 }
 </style>
