@@ -560,10 +560,23 @@ html,body{overflow-x:clip}
 @media (prefers-reduced-motion:no-preference){
   .js-rv [data-r]{opacity:0;translate:0 42px;transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--rd,0) * 90ms)}
   .js-rv [data-r].in-v{opacity:1;translate:0 0}
-  .js-rv .stage > img[data-r]{translate:-50% -50%}
   .js-rv .rv[data-r]{transition:opacity 1s cubic-bezier(.22,1,.36,1),translate 1.2s cubic-bezier(.22,1,.36,1),scale .7s var(--ease),background-color .6s var(--ease),color .6s var(--ease),box-shadow .6s var(--ease)}
   .js-rv .rv[data-r]:not(.on).in-v{opacity:.55}
   [data-px]{scale:1.14;translate:0 var(--py,0px);will-change:translate}
+}
+/* mobile: cinta Atendemos, hero, footer */
+@media (max-width:860px){
+  .band{gap:14px;padding-block:28px 10px}
+  .band ul{display:block;width:100%;font-size:21px}
+  .band li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:15px 0;border-top:1px solid rgba(255,255,255,.2)}
+  .band li::before,.band li + li::before{content:"";order:2;flex-shrink:0;width:40px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 16'%3E%3Cpath d='M0 10h12l2-2 2 2h2l3-8 3 13 2-5h14' fill='none' stroke='%23fff' stroke-opacity='.7' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat}
+  .hero .v{margin-right:0}
+  .hero .doc{translate:-46% 0}
+}
+@media (max-width:560px){
+  .ftop{grid-template-columns:.8fr 1.2fr;gap:36px 16px}
+  .ftop a[href^="tel"]{white-space:nowrap;font-size:13.5px}
+  .ftop > .fbrand,.ftop > div:last-child{grid-column:1/-1}
 }
 </style>
 </head>
@@ -1176,7 +1189,7 @@ function slider(el){
 function reveal(){
   if(RM.matches||!("IntersectionObserver" in window))return;
   document.documentElement.classList.add("js-rv");
-  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage > img, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
+  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
   const els=[...main.querySelectorAll(SEL)].filter(e=>!e.closest(".hero,.phead,.rise")&&!e.classList.contains("rise"));
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-v");io.unobserve(en.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08});
   els.forEach(e=>{const sib=[...e.parentElement.children].filter(x=>els.includes(x));e.style.setProperty("--rd",Math.min(sib.indexOf(e),6));e.setAttribute("data-r","");io.observe(e)});

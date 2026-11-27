@@ -347,7 +347,7 @@ function slider(el){
 function reveal(){
   if(RM.matches||!("IntersectionObserver" in window))return;
   document.documentElement.classList.add("js-rv");
-  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage > img, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
+  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
   const els=[...main.querySelectorAll(SEL)].filter(e=>!e.closest(".hero,.phead,.rise")&&!e.classList.contains("rise"));
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-v");io.unobserve(en.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08});
   els.forEach(e=>{const sib=[...e.parentElement.children].filter(x=>els.includes(x));e.style.setProperty("--rd",Math.min(sib.indexOf(e),6));e.setAttribute("data-r","");io.observe(e)});
