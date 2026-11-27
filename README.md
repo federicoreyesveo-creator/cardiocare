@@ -2,7 +2,7 @@
 
 Rediseño del sitio del Dr. Josué Cauich Segovia, cardiólogo pediatra en Mérida.
 
-- `index.html`: el sitio completo en un solo archivo (versión 3), listo para publicar.
+- `index.html`, `acerca-de/`, `contacto/`, `servicios/`: el sitio publicado (lo genera el build, no se edita a mano).
 - `src/`: las fuentes. `python build.py` dentro de `src/` genera una página por URL (`/`, `/acerca-de/`, `/contacto/`, `/servicios/<slug>/`),
   las fotos de `img/`, `sitemap.xml` y `llms.txt`. Con Playwright instalado, además escribe el contenido de cada página ya
   renderizado en el HTML (para Google y buscadores de IA). `CHROME_PATH` opcional: ruta a un Chrome/Chromium para el prerender.
