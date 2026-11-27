@@ -13,6 +13,17 @@ const initials=n=>n.split(" ").slice(0,2).map(w=>w[0]).join("");
 const plus='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
 const bi=(ic=plus)=>`<span class="bi">${ic}</span>`;
 const im=(key,alt="",extra="")=>IMG[key]?`<img src="${IMG[key]}" alt="${alt}" decoding="async" ${extra}>`:"";
+
+/* preguntas frecuentes: <details> nativo (se lee sin JS, accesible y abre uno a la vez) */
+const FAQ_IC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+function faq(items,{id="faq",lbl="Preguntas frecuentes",h="<span class=\"gr\">Lo que más</span> nos preguntan",sub="Respuestas claras a las dudas que más escuchamos en consulta. Si la tuya no está aquí, llámanos."}={}){
+  if(!items||!items.length)return "";
+  return `<section class="faq" id="${id}" aria-labelledby="${id}-h">
+  <div class="fq-h"><span class="lbl">${lbl}</span><h2 class="h2" id="${id}-h">${h}</h2><p class="sub">${sub}</p>
+    <a class="btn" href="tel:${PHONES[0][1]}">${PHONES[0][0]} ${bi(I.phone)}</a></div>
+  <div class="fq-l">${items.map((f,i)=>`<details class="qa" name="${id}"${i===0?" open":""}><summary><span class="n mono">${String(i+1).padStart(2,"0")}</span><h3>${f.q}</h3><span class="pm">${FAQ_IC}</span></summary><div class="ans"><p>${f.a}</p>${f.link?`<a class="link" href="${f.link}">Leer más +</a>`:""}</div></details>`).join("")}</div>
+</section>`;
+}
 const nn=i=>String(i+1).padStart(2,"0");
 const two=(t)=>{const k=t.indexOf(":");return k>0?`${t.slice(0,k)}: <span class="gr">${t.slice(k+1).trim()}</span>`:t};
 const ORDER=["diagnostico-avanzado","colocacion-de-stents","disautonomia","cateterismo","dolor-toracico","cardiopatias-congenitas","diagnostico-de-arritmias","soplos","cierre-de-defectos"];
@@ -120,8 +131,7 @@ function home(){
   return `
 <section class="panel hero" aria-labelledby="h1">
   <div class="t">
-    <span class="lbl rise">Cardiólogo Pediatra Intervencionista · Mérida</span>
-    <h1 id="h1" class="rise d1"><span class="gr">Tu aliado en la salud</span> del corazón de tus hijos.</h1>
+    <h1 id="h1"><span class="lbl rise">Cardiólogo pediatra intervencionista en Mérida</span><span class="hl rise d1"><span class="gr">Tu aliado en la salud</span> del corazón de tus hijos.</span></h1>
     <p class="lead rise d2">Técnicas avanzadas y de mínima invasión para que tu hijo crezca sano y sin límites, sin salir de Yucatán.</p>
     <div class="ct rise d3"><a class="btn" href="/contacto/">Agenda tu cita ${bi()}</a><span class="alt">o llama al <a href="tel:${PHONES[0][1]}">${PHONES[0][0]}</a></span></div>
     <div class="nums rise d4">
@@ -184,6 +194,8 @@ function home(){
   ${arrows("rc")}
   <div class="rc" id="rc">${REVIEWS.map(([n,t],i)=>`<figure class="rv ${i===2?"on":""}"><blockquote>“${t}”</blockquote><figcaption><span class="av" aria-hidden="true">${initials(n)}</span><span><b>${n}</b><span>Google · ★★★★★</span></span></figcaption></figure>`).join("")}</div>
 </section>
+
+${faq(FAQ.home)}
 
 ${contactBlock()}
 ${footer()}`;
@@ -266,6 +278,7 @@ function service(s){
   <div class="media rise d2">${im(s.img[2],s.img[1],'fetchpriority="high"')}</div>
 </header>
 <article class="article"><div class="prose">${s.body}</div></article>
+${faq(FAQ.servicios[s.slug],{id:"faq-svc",h:`<span class="gr">Preguntas sobre</span> ${s.name.toLowerCase()}`,sub:"Lo esencial en pocas líneas. Para tu caso en particular, la valoración en consulta es lo que define el camino."})}
 <section class="help bleed" aria-labelledby="help-h">
   <div class="im">${im("ph-recepcion","Recepcionista del consultorio atendiendo una llamada",'loading="lazy"')}</div>
   <div class="t"><div><span class="lbl">Atención</span><h2 class="h2" id="help-h"><span class="gr">¿Tienes alguna</span> pregunta?</h2><p>Nuestros gestores de atención al cliente están disponibles las 24 horas, los 7 días de la semana para responder a tus preguntas.</p></div><a class="btn red" href="tel:${PHONES[0][1]}">${PHONES[0][0]} ${bi(I.phone)}</a></div>
@@ -347,7 +360,7 @@ function slider(el){
 function reveal(){
   if(RM.matches||!("IntersectionObserver" in window))return;
   document.documentElement.classList.add("js-rv");
-  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap";
+  const SEL="section:not(.hero) > .lbl, section:not(.hero) .h2, .sub, .center .score, .arrows, .car, .rv, .stage .co, .about blockquote, .about .who, .about .t > .btn, .steps > *, .about .ph, .lane, .papas .note, .certs li, .pillars > *, .prose > *, .groups > *, .help .t > *, .help .im, .calls > *, .cinfo > *, .cmap, .ftop > *, .fwm, .contact .t > *, .map, .tablewrap, .faq .fq-h > *, .faq .qa";
   const els=[...main.querySelectorAll(SEL)].filter(e=>!e.closest(".hero,.phead,.rise")&&!e.classList.contains("rise"));
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-v");io.unobserve(en.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.08});
   els.forEach(e=>{const sib=[...e.parentElement.children].filter(x=>els.includes(x));e.style.setProperty("--rd",Math.min(sib.indexOf(e),6));e.setAttribute("data-r","");io.observe(e)});
