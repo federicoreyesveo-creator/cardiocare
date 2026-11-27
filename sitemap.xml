@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cardiocare-sigma.vercel.app/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/acerca-de/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/contacto/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/diagnostico-avanzado/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/colocacion-de-stents/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/disautonomia/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/cateterismo/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/dolor-toracico/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/cardiopatias-congenitas/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/diagnostico-de-arritmias/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/soplos/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://cardiocare-sigma.vercel.app/servicios/cierre-de-defectos/</loc><lastmod>2026-11-27</lastmod></url>
 </urlset>

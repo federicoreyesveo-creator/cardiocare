@@ -62,7 +62,7 @@ const hoursHTML=()=>{const {d}=nowMerida();return HOURS.map(x=>`<div class="h ${
 /* ---------- bloques compartidos ---------- */
 const carousel=(list,id,bigFirst=true)=>`
 <div class="car" id="${id}" tabindex="0" aria-label="Servicios">
-  ${list.map((s,i)=>{const k=(i===0&&bigFirst&&IMG[s.img[2]+"-54"])?s.img[2]+"-54":s.img[2];return `<a class="sc ${i===0&&bigFirst?"big":""}" href="#servicio-${s.slug}">${im(k,s.img[1],'loading="lazy"')}<span class="n">${nn(S.indexOf(s))} / ${String(S.length).padStart(2,"0")}</span><span class="tx"><span><h3>${s.name}</h3><p>${s.short}</p></span><span class="ar">${I.arrow}</span></span></a>`}).join("")}
+  ${list.map((s,i)=>{const k=(i===0&&bigFirst&&IMG[s.img[2]+"-54"])?s.img[2]+"-54":s.img[2];return `<a class="sc ${i===0&&bigFirst?"big":""}" href="/servicios/${s.slug}/">${im(k,s.img[1],'loading="lazy"')}<span class="n">${nn(S.indexOf(s))} / ${String(S.length).padStart(2,"0")}</span><span class="tx"><span><h3>${s.name}</h3><p>${s.short}</p></span><span class="ar">${I.arrow}</span></span></a>`}).join("")}
 </div>`;
 const arrows=id=>`<div class="arrows"><button class="prev" data-car="${id}" data-dir="-1" aria-label="Anterior">${I.arrow}</button><button class="next" data-car="${id}" data-dir="1" aria-label="Siguiente">${I.arrow}</button></div>`;
 
@@ -91,13 +91,13 @@ const ALMA="https://www.almabruta.studio";
 const footer=()=>`
 <footer class="foot">
   <div class="ftop">
-    <div class="fbrand"><a class="logo" href="#inicio">${LOGO}<span>Cardio Care</span></a><p>Dr. Josué Cauich Segovia<br>Cardiólogo Pediatra Intervencionista<br>Mérida, Yucatán</p></div>
-    <nav aria-label="Pie de página"><h2 class="fh">Sitio</h2><a href="#inicio">Inicio</a><a href="#acerca-de">Acerca de</a><a href="#servicios">Servicios</a><a href="#contacto">Contacto</a></nav>
+    <div class="fbrand"><a class="logo" href="/">${LOGO}<span>Cardio Care</span></a><p>Dr. Josué Cauich Segovia<br>Cardiólogo Pediatra Intervencionista<br>Mérida, Yucatán</p></div>
+    <nav aria-label="Pie de página"><h2 class="fh">Sitio</h2><a href="/">Inicio</a><a href="/acerca-de/">Acerca de</a><a href="/#servicios">Servicios</a><a href="/contacto/">Contacto</a></nav>
     <div><h2 class="fh">Contacto</h2>${PHONES.map(([t,n])=>`<a class="mono" href="tel:${n}">${t}</a>`).join("")}<a href="${MAPS}" target="_blank" rel="noopener">Hospital Star Médica, Altabrisa</a></div>
     <div><h2 class="fh">Horario</h2>${HOURS.map(x=>`<span class="hr"><span>${x[0]}</span><span class="mono">${x[1]}</span></span>`).join("")}</div>
   </div>
   <div class="fwm" aria-hidden="true">${ecgWide([.2,.64]).replace('class="ecg draw"','class="ecg"')}<span class="wm">Cardio Care</span></div>
-  <div class="fbot"><span>© 2026 Cardio Care · Dr. Josué Cauich Segovia</span><span class="r"><a class="ab" href="${ALMA}" target="_blank" rel="noopener">Diseñado por <b>Alma Bruta</b></a><a href="#inicio" onclick="scrollTo({top:0,behavior:'smooth'});return false">Volver arriba ↑</a></span></div>
+  <div class="fbot"><span>© 2026 Cardio Care · Dr. Josué Cauich Segovia</span><span class="r"><a class="ab" href="${ALMA}" target="_blank" rel="noopener">Diseñado por <b>Alma Bruta</b></a><a href="/" onclick="scrollTo({top:0,behavior:'smooth'});return false">Volver arriba ↑</a></span></div>
 </footer>`;
 
 const steps=()=>`<ol class="steps">
@@ -116,14 +116,14 @@ const pillars=()=>`<div class="pillars">
 /* ---------- vistas ---------- */
 function home(){
   const RATES=[["1 semana",90,160,"var(--r)"],["1–2 meses",120,180,"var(--r)"],["6–11 meses",110,170,"var(--r)"],["3–4 años",70,140,"var(--primary)"],["8–11 años",60,130,"var(--primary)"],["16+ años",50,120,"var(--ink)"]];
-  const co=(slug,cls,tag,pos)=>{const s=bySlug[slug];return `<a class="co ${cls}" href="#servicio-${s.slug}"><span class="tg">${tag}</span><b>${s.name}</b><p>${s.short}.</p><span class="link">Leer más +</span></a>`};
+  const co=(slug,cls,tag,pos)=>{const s=bySlug[slug];return `<a class="co ${cls}" href="/servicios/${s.slug}/"><span class="tg">${tag}</span><b>${s.name}</b><p>${s.short}.</p><span class="link">Leer más +</span></a>`};
   return `
 <section class="panel hero" aria-labelledby="h1">
   <div class="t">
     <span class="lbl rise">Cardiólogo Pediatra Intervencionista · Mérida</span>
     <h1 id="h1" class="rise d1"><span class="gr">Tu aliado en la salud</span> del corazón de tus hijos.</h1>
     <p class="lead rise d2">Técnicas avanzadas y de mínima invasión para que tu hijo crezca sano y sin límites, sin salir de Yucatán.</p>
-    <div class="ct rise d3"><a class="btn" href="#contacto">Agenda tu cita ${bi()}</a><span class="alt">o llama al <a href="tel:${PHONES[0][1]}">${PHONES[0][0]}</a></span></div>
+    <div class="ct rise d3"><a class="btn" href="/contacto/">Agenda tu cita ${bi()}</a><span class="alt">o llama al <a href="tel:${PHONES[0][1]}">${PHONES[0][0]}</a></span></div>
     <div class="nums rise d4">
       <div><b>250<sup>+</sup></b><span>Pacientes atendidos</span></div>
       <div><b>315<sup>+</sup></b><span>Sesiones médicas</span></div>
@@ -165,7 +165,7 @@ function home(){
     <blockquote>${QUOTE}</blockquote>
     <p class="who"><b>Dr. Josué Cauich</b> · Cardiólogo Pediatra Intervencionista</p>
     ${steps()}
-    <a class="btn" href="#acerca-de" style="margin-top:44px">Conoce al doctor ${bi()}</a>
+    <a class="btn" href="/acerca-de/" style="margin-top:44px">Conoce al doctor ${bi()}</a>
   </div>
   <div class="ph">${im("dr2","El Dr. Josué Cauich Segovia con bata blanca y los brazos cruzados",'loading="lazy"')}<div class="float"><span class="ic">${I.people}</span><span><b>Miembro activo</b>AMECC</span></div></div>
 </section>
@@ -193,8 +193,8 @@ function about(){
   return `
 <header class="phead">
   <div>
-    <nav class="crumb rise" aria-label="Ruta"><a href="#inicio">Inicio</a><span>/</span><span>Acerca de</span></nav>
-    <h1 class="rise d1"><span class="gr">Tu aliado en la salud</span> del corazón de tus hijos.</h1>
+    <nav class="crumb rise" aria-label="Ruta"><a href="/">Inicio</a><span>/</span><span>Acerca de</span></nav>
+    <h1 class="rise d1"><span class="gr">Dr. Josué Cauich Segovia,</span> cardiólogo pediatra en Mérida.</h1>
     <p class="q rise d2">${QUOTE}</p>
     <div class="ct rise d3"><a class="btn" href="tel:${PHONES[0][1]}">Agenda tu cita ${bi(I.phone)}</a></div>
     <div class="nums rise d4" style="padding-top:44px"><div><b>250<sup>+</sup></b><span>Pacientes satisfechos</span></div><div><b>315<sup>+</sup></b><span>Intervenciones</span></div></div>
@@ -237,7 +237,7 @@ function contact(){
   return `
 <section class="cpage" aria-labelledby="ct1">
   <div>
-    <nav class="crumb rise" aria-label="Ruta"><a href="#inicio">Inicio</a><span>/</span><span>Contacto</span></nav>
+    <nav class="crumb rise" aria-label="Ruta"><a href="/">Inicio</a><span>/</span><span>Contacto</span></nav>
     <h1 id="ct1" class="rise d1"><span class="gr">Contáctanos.</span> Agenda una consulta para tu hijo.</h1>
     <p class="q rise d2">Agenda una consulta por teléfono. Estamos en Altabrisa, Mérida.</p>
     <div class="rise d2" style="margin-top:22px">${liveHTML()}</div>
@@ -258,7 +258,7 @@ function service(s){
   return `
 <header class="phead">
   <div>
-    <nav class="crumb rise" aria-label="Ruta"><a href="#servicios">Servicios</a><span>/</span><span>${nn(i)} de ${String(S.length).padStart(2,"0")}</span></nav>
+    <nav class="crumb rise" aria-label="Ruta"><a href="/#servicios">Servicios</a><span>/</span><span>${nn(i)} de ${String(S.length).padStart(2,"0")}</span></nav>
     <h1 class="rise d1">${two(s.title)}</h1>
     <p class="q rise d2">${s.q||s.short}</p>
     <div class="ct rise d3"><a class="btn" href="tel:${PHONES[0][1]}">Agenda tu cita ${bi(I.phone)}</a></div>
@@ -278,26 +278,30 @@ ${contactBlock()}
 ${footer()}`;
 }
 
-/* ---------- router ---------- */
+/* ---------- router ----------
+   Cada página tiene su URL (/, /acerca-de/, /contacto/, /servicios/<slug>/) y llega ya escrita en el HTML (prerender).
+   Los links viejos con # (#servicio-x, #acerca-de, #contacto) redirigen a la URL nueva. */
 const main=document.getElementById("main");
 const SCROLL={servicios:"servicios","por-que":"por-que",resenas:"resenas",tecnologia:"tecnologia",ubicacion:"ubicacion"};
+const legacyPath=h=>h.startsWith("servicio-")&&bySlug[h.slice(9)]?`/servicios/${h.slice(9)}/`:(h==="acerca-de"||h==="contacto")?`/${h}/`:null;
 let last="";
 function route(){
-  const h=(location.hash||"#inicio").slice(1);
-  let view="inicio",html,target=null;
-  if(h.startsWith("servicio-")&&bySlug[h.slice(9)]){view="servicios";html=service(bySlug[h.slice(9)])}
-  else if(h==="acerca-de"){view="acerca-de";html=about()}
-  else if(h==="contacto"){view="contacto";html=contact()}
-  else {view=SCROLL[h]==="servicios"?"servicios":"inicio";html=home();target=SCROLL[h]||null}
-  const key=h.startsWith("servicio-")||h==="acerca-de"||h==="contacto"?h:"inicio";
-  // La portada ya viene escrita en el HTML (prerender): la primera vez no se vuelve a pintar, solo se activa.
-  if(key!==last){if(main.dataset.pre===key)main.removeAttribute("data-pre");else main.innerHTML=html;last=key;bindPage()}
-  document.querySelectorAll("[data-nav]").forEach(a=>a.toggleAttribute("aria-current",a.dataset.nav===view)||a.removeAttribute("aria-current"));
+  const h=location.hash.slice(1);
+  const old=legacyPath(h);
+  if(old){location.replace(old);return}
+  const p=location.pathname.replace(/index\.html$/,"");
+  const sv=p.match(/^\/servicios\/([^/]+)\/?$/);
+  let view="inicio",key="inicio",html=home;
+  if(sv&&bySlug[sv[1]]){view="servicios";key="servicio-"+sv[1];html=()=>service(bySlug[sv[1]])}
+  else if(/^\/acerca-de\/?$/.test(p)){view=key="acerca-de";html=about}
+  else if(/^\/contacto\/?$/.test(p)){view=key="contacto";html=contact}
+  else if(SCROLL[h]==="servicios")view="servicios";
+  // La página ya viene escrita en el HTML: la primera vez no se vuelve a pintar, solo se activa.
+  if(key!==last){if(main.dataset.pre===key)main.removeAttribute("data-pre");else main.innerHTML=html();last=key;bindPage()}
   document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===view)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   closeMega();closeDrawer();
-  if(target){const el=document.getElementById(target);if(el)requestAnimationFrame(()=>el.scrollIntoView({behavior:"smooth"}))}
-  else window.scrollTo({top:0,behavior:"instant"});
-  document.title=(view==="inicio"?"Cardiólogo Pediatra en Mérida":h.startsWith("servicio-")?bySlug[h.slice(9)].name:view==="acerca-de"?"Acerca del Dr. Josué Cauich":"Contacto")+" · Cardio Care";
+  const target=SCROLL[h]&&document.getElementById(SCROLL[h]);
+  if(target)requestAnimationFrame(()=>target.scrollIntoView({behavior:"smooth"}));
   onScroll();
 }
 function fitWM(){document.querySelectorAll(".fwm").forEach(f=>{const w=f.querySelector(".wm");const cs=getComputedStyle(f),cw=f.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);if(!cw)return;
@@ -367,15 +371,15 @@ const megaWrap=document.getElementById("mega"), megabtn=document.getElementById(
 (function(){
   const mp=document.getElementById("megapanel");
   const N=String(S.length).padStart(2,"0");
-  mp.innerHTML=`<div class="mg-l"><div class="mg-h"><span class="lbl">Nuestros servicios</span><a class="link" href="#servicios">Ver todos ${I.arrow.replace('<svg','<svg width="15" height="15"')}</a></div>
-  <div class="mg-list">${SVC.map((s,i)=>`<a class="mg-i" href="#servicio-${s.slug}" data-k="${s.slug}"><span class="n">${nn(S.indexOf(s))}</span><span class="t"><b>${s.name}</b><small>${s.short}</small></span><span class="go">${I.arrow}</span></a>`).join("")}</div>
+  mp.innerHTML=`<div class="mg-l"><div class="mg-h"><span class="lbl">Nuestros servicios</span><a class="link" href="/#servicios">Ver todos ${I.arrow.replace('<svg','<svg width="15" height="15"')}</a></div>
+  <div class="mg-list">${SVC.map((s,i)=>`<a class="mg-i" href="/servicios/${s.slug}/" data-k="${s.slug}"><span class="n">${nn(S.indexOf(s))}</span><span class="t"><b>${s.name}</b><small>${s.short}</small></span><span class="go">${I.arrow}</span></a>`).join("")}</div>
   <div class="mg-f"><span>¿Tienes alguna pregunta? Llámanos y te orientamos.</span><a class="mono" href="tel:${PHONES[0][1]}">${PHONES[0][0]}</a></div></div>
-  <a class="mg-feat" id="mgfeat" href="#servicio-${SVC[0].slug}"><img id="mgimg" src="${IMG[SVC[0].img[2]]}" alt="" loading="lazy" decoding="async"><span class="tx"><small id="mgn">Servicio ${nn(S.indexOf(SVC[0]))} / ${N}</small><b id="mgt">${SVC[0].name}</b><span id="mgs">${SVC[0].short}</span></span><span class="ar">${I.arrow}</span></a>`;
-  const show=s=>{document.getElementById("mgfeat").href="#servicio-"+s.slug;document.getElementById("mgimg").src=IMG[s.img[2]];document.getElementById("mgn").textContent=`Servicio ${nn(S.indexOf(s))} / ${N}`;document.getElementById("mgt").textContent=s.name;document.getElementById("mgs").textContent=s.short;mp.querySelectorAll(".mg-i").forEach(x=>x.classList.toggle("on",x.dataset.k===s.slug))};
+  <a class="mg-feat" id="mgfeat" href="/servicios/${SVC[0].slug}/"><img id="mgimg" src="${IMG[SVC[0].img[2]]}" alt="" loading="lazy" decoding="async"><span class="tx"><small id="mgn">Servicio ${nn(S.indexOf(SVC[0]))} / ${N}</small><b id="mgt">${SVC[0].name}</b><span id="mgs">${SVC[0].short}</span></span><span class="ar">${I.arrow}</span></a>`;
+  const show=s=>{document.getElementById("mgfeat").href="/servicios/"+s.slug+"/";document.getElementById("mgimg").src=IMG[s.img[2]];document.getElementById("mgn").textContent=`Servicio ${nn(S.indexOf(s))} / ${N}`;document.getElementById("mgt").textContent=s.name;document.getElementById("mgs").textContent=s.short;mp.querySelectorAll(".mg-i").forEach(x=>x.classList.toggle("on",x.dataset.k===s.slug))};
   mp.querySelectorAll(".mg-i").forEach(a=>{a.addEventListener("mouseenter",()=>show(bySlug[a.dataset.k]));a.addEventListener("focus",()=>show(bySlug[a.dataset.k]))});
   show(SVC[0]);
 })();
-document.getElementById("drawersvc").innerHTML=SVC.map(s=>`<a href="#servicio-${s.slug}">${s.name}</a>`).join("");
+document.getElementById("drawersvc").innerHTML=SVC.map(s=>`<a href="/servicios/${s.slug}/">${s.name}</a>`).join("");
 function closeMega(){megaWrap.classList.remove("open");megabtn.setAttribute("aria-expanded","false")}
 megabtn.addEventListener("click",e=>{e.stopPropagation();const o=!megaWrap.classList.contains("open");megaWrap.classList.toggle("open",o);megabtn.setAttribute("aria-expanded",String(o))});
 document.addEventListener("click",e=>{if(!megaWrap.contains(e.target))closeMega()});
@@ -386,7 +390,7 @@ menubtn.addEventListener("click",()=>{drawer.hidden=false;menubtn.setAttribute("
 document.getElementById("closebtn").addEventListener("click",closeDrawer);
 drawer.addEventListener("click",e=>{if(e.target.closest("a"))closeDrawer()});
 /* el logo es el inicio: si ya estás en la portada, sube arriba */
-document.querySelectorAll("a.logo").forEach(a=>a.addEventListener("click",()=>{if((location.hash||"#inicio")==="#inicio")window.scrollTo({top:0,behavior:"smooth"})}));
+document.querySelectorAll("a.logo").forEach(a=>a.addEventListener("click",e=>{if(location.pathname==="/"){e.preventDefault();closeDrawer();history.replaceState(null,"","/");window.scrollTo({top:0,behavior:"smooth"})}}));
 
 /* barra flotante y navegación al hacer scroll */
 const top_=document.getElementById("top");

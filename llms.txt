@@ -11,20 +11,21 @@ Certificado por el Consejo Mexicano de Cardiología (Cardiología Pediátrica e 
 - Lunes a viernes: 09:00 – 20:00
 - Sábado: 09:00 – 13:00
 - Domingo: cerrado
+- Contacto: https://cardiocare-sigma.vercel.app/contacto/
 
 ## Servicios
 
-- Diagnóstico avanzado: estudio completo del corazón del niño
-- Colocación de stents
-- Disautonomía
-- Cateterismo cardiaco
-- Dolor torácico en niños
-- Cardiopatías congénitas
-- Diagnóstico de arritmias
-- Soplos cardiacos
-- Cierre de defectos y valvuloplastia
+- [Diagnóstico Avanzado](https://cardiocare-sigma.vercel.app/servicios/diagnostico-avanzado/): El GPS del corazón de tu hijo
+- [Colocación de Stents](https://cardiocare-sigma.vercel.app/servicios/colocacion-de-stents/): Manteniendo las avenidas abiertas
+- [Disautonomía](https://cardiocare-sigma.vercel.app/servicios/disautonomia/): Cuando el sistema nervioso autónomo pierde el equilibrio
+- [Cateterismo](https://cardiocare-sigma.vercel.app/servicios/cateterismo/): Qué es, para qué sirve y cuándo se necesita
+- [Dolor torácico](https://cardiocare-sigma.vercel.app/servicios/dolor-toracico/): ¿Todo dolor de pecho es grave?
+- [Cardiopatías Congénitas](https://cardiocare-sigma.vercel.app/servicios/cardiopatias-congenitas/): Aparecen en cerca del 1% de los recién nacidos
+- [Diagnóstico de Arritmias](https://cardiocare-sigma.vercel.app/servicios/diagnostico-de-arritmias/): ¿Mi hijo tiene una arritmia? ¿Es malo?
+- [Soplos](https://cardiocare-sigma.vercel.app/servicios/soplos/): ¿Todos los soplos son malos?
+- [Cierre de defectos](https://cardiocare-sigma.vercel.app/servicios/cierre-de-defectos/): Valvuloplastia: devolviendo el flujo con un globo mágico
 
-## Enlaces
+## Más
 
-- Sitio: https://cardiocare-sigma.vercel.app/
-- Perfil en Google Maps: https://www.google.com/maps/place/Dr+Josu%C3%A9+Cauich+Segovia+Cardi%C3%B3logo+Pediatra/@21.0160689,-89.5849652,17z
+- [Acerca del Dr. Josué Cauich Segovia](https://cardiocare-sigma.vercel.app/acerca-de/)
+- [Perfil en Google Maps](https://www.google.com/maps/place/Dr+Josu%C3%A9+Cauich+Segovia+Cardi%C3%B3logo+Pediatra/@21.0160689,-89.5849652,17z)
