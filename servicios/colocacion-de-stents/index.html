@@ -512,7 +512,12 @@ html,body{overflow-x:clip}
 }
 @keyframes sonar{0%{scale:.28;opacity:0}18%{opacity:.85}70%{opacity:.35}100%{scale:1;opacity:0}}
 @keyframes ecgscroll{to{transform:translateX(var(--d))}}
-@media (max-width:1100px){.sonar{display:none}}
+.sonar.hs{top:58%;width:1000px;z-index:0;border-color:color-mix(in oklab,var(--c) 40%,transparent)}
+@media (max-width:1100px){
+  .sonar.hs{width:640px}
+  .stage .sonar{position:relative;left:auto;top:auto;translate:none;grid-row:1;grid-column:1/-1;place-self:center;width:min(560px,112%)}
+  .stage > img{grid-row:1;position:relative;left:auto;top:auto;z-index:1}
+}
 
 /* ---------- menú de servicios ---------- */
 .has-mega{position:static}
@@ -577,6 +582,12 @@ html,body{overflow-x:clip}
   .ftop{grid-template-columns:.8fr 1.2fr;gap:36px 16px}
   .ftop a[href^="tel"]{white-space:nowrap;font-size:13.5px}
   .ftop > .fbrand,.ftop > div:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){
+  .ftop .hr{display:grid;grid-template-columns:.8fr 1.2fr;column-gap:16px}
+  .rv{width:66vw;scale:.94}
+  .rv:not(.on),.js-rv .rv[data-r]:not(.on).in-v{opacity:1;background:var(--ice)}
+  .rc{padding-inline:calc(50% - 33vw)}
 }
 </style>
 </head>
@@ -964,7 +975,7 @@ function home(){
     </div>
   </div>
   <div class="v">
-    <div class="rings" aria-hidden="true"></div>
+    <span class="sonar hs" style="--i:0" aria-hidden="true"></span><span class="sonar hs" style="--i:1" aria-hidden="true"></span><span class="sonar hs" style="--i:2" aria-hidden="true"></span>
     ${im("dr-cut","El Dr. Josué Cauich Segovia, cardiólogo pediatra, con bata blanca",'class="doc" fetchpriority="high"')}
     <div class="float f1"><span class="ic">${I.seal}</span><span><b>Certificado</b>Consejo Mexicano de Cardiología</span></div>
     <div class="float f2"><span class="ic">${I.cath}</span><span><b>Mínima invasión</b>Cateterismo sin abrir el pecho</span></div>

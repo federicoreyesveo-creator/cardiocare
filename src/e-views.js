@@ -131,7 +131,7 @@ function home(){
     </div>
   </div>
   <div class="v">
-    <div class="rings" aria-hidden="true"></div>
+    <span class="sonar hs" style="--i:0" aria-hidden="true"></span><span class="sonar hs" style="--i:1" aria-hidden="true"></span><span class="sonar hs" style="--i:2" aria-hidden="true"></span>
     ${im("dr-cut","El Dr. Josué Cauich Segovia, cardiólogo pediatra, con bata blanca",'class="doc" fetchpriority="high"')}
     <div class="float f1"><span class="ic">${I.seal}</span><span><b>Certificado</b>Consejo Mexicano de Cardiología</span></div>
     <div class="float f2"><span class="ic">${I.cath}</span><span><b>Mínima invasión</b>Cateterismo sin abrir el pecho</span></div>

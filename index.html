@@ -513,7 +513,12 @@ html,body{overflow-x:clip}
 }
 @keyframes sonar{0%{scale:.28;opacity:0}18%{opacity:.85}70%{opacity:.35}100%{scale:1;opacity:0}}
 @keyframes ecgscroll{to{transform:translateX(var(--d))}}
-@media (max-width:1100px){.sonar{display:none}}
+.sonar.hs{top:58%;width:1000px;z-index:0;border-color:color-mix(in oklab,var(--c) 40%,transparent)}
+@media (max-width:1100px){
+  .sonar.hs{width:640px}
+  .stage .sonar{position:relative;left:auto;top:auto;translate:none;grid-row:1;grid-column:1/-1;place-self:center;width:min(560px,112%)}
+  .stage > img{grid-row:1;position:relative;left:auto;top:auto;z-index:1}
+}
 
 /* ---------- menú de servicios ---------- */
 .has-mega{position:static}
@@ -579,6 +584,12 @@ html,body{overflow-x:clip}
   .ftop a[href^="tel"]{white-space:nowrap;font-size:13.5px}
   .ftop > .fbrand,.ftop > div:last-child{grid-column:1/-1}
 }
+@media (max-width:560px){
+  .ftop .hr{display:grid;grid-template-columns:.8fr 1.2fr;column-gap:16px}
+  .rv{width:66vw;scale:.94}
+  .rv:not(.on),.js-rv .rv[data-r]:not(.on).in-v{opacity:1;background:var(--ice)}
+  .rc{padding-inline:calc(50% - 33vw)}
+}
 </style>
 </head>
 <body>
@@ -616,7 +627,7 @@ html,body{overflow-x:clip}
     </div>
   </div>
   <div class="v">
-    <div class="rings" aria-hidden="true"></div>
+    <span class="sonar hs" style="--i:0" aria-hidden="true"></span><span class="sonar hs" style="--i:1" aria-hidden="true"></span><span class="sonar hs" style="--i:2" aria-hidden="true"></span>
     <img src="/img/dr-cut.webp" alt="El Dr. Josué Cauich Segovia, cardiólogo pediatra, con bata blanca" decoding="async" class="doc" fetchpriority="high">
     <div class="float f1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 14.5-1.5 6.5L12 19l4.5 2L15 14.5"/><path d="m9.5 9 1.7 1.7L14.5 7.5"/></svg></span><span><b>Certificado</b>Consejo Mexicano de Cardiología</span></div>
     <div class="float f2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c4 0 4-6 8-6s4 6 8 6"/><path d="M11 12V4"/><circle cx="11" cy="4" r="1.5"/></svg></span><span><b>Mínima invasión</b>Cateterismo sin abrir el pecho</span></div>
@@ -1015,7 +1026,7 @@ function home(){
     </div>
   </div>
   <div class="v">
-    <div class="rings" aria-hidden="true"></div>
+    <span class="sonar hs" style="--i:0" aria-hidden="true"></span><span class="sonar hs" style="--i:1" aria-hidden="true"></span><span class="sonar hs" style="--i:2" aria-hidden="true"></span>
     ${im("dr-cut","El Dr. Josué Cauich Segovia, cardiólogo pediatra, con bata blanca",'class="doc" fetchpriority="high"')}
     <div class="float f1"><span class="ic">${I.seal}</span><span><b>Certificado</b>Consejo Mexicano de Cardiología</span></div>
     <div class="float f2"><span class="ic">${I.cath}</span><span><b>Mínima invasión</b>Cateterismo sin abrir el pecho</span></div>
