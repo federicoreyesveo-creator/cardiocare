@@ -528,6 +528,7 @@ html,body{overflow-x:clip}
 @media (max-width:560px){.cmap .card{grid-template-columns:1fr}}
 /* carrusel pegado al borde de las cajas */
 .car{padding:0 0 8px;scroll-padding-inline:0}
+.car,.rc{overflow-y:hidden;overscroll-behavior-x:contain}
 /* aparición y parallax al hacer scroll */
 .help .im{overflow:hidden}
 @media (prefers-reduced-motion:no-preference){
